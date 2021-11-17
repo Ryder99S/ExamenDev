@@ -1,0 +1,5 @@
+*.pyc
+*.DS_Store
+ProyectoExamen/__pycache__/*
+ExamenApp/__pycache__/*
+ExamenApp/migrations/__pycache__/*
