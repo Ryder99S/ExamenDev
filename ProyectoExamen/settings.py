@@ -79,19 +79,19 @@ WSGI_APPLICATION = 'ProyectoExamen.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'd4u60fdrhnpl4r',
-    #     'USER': 'gbuhkowlokesql',
-    #     'PASSWORD':'dd7def1cac1aa9ae94e0f49dd6d227a44706775a8e51bbd7c3b1459ffa2e0fec',
-    #     'HOST': 'ec2-3-226-205-10.compute-1.amazonaws.com',
-    #     'PORT':'5432',
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
+
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd1nkng5k2juv0c',
+        'USER': 'wdjbkonhpllwjc',
+        'PASSWORD':'00d019f9ceb5bfbfcefb0b5243f1c0de3ec6f57a76053b624b8b4e7811662851',
+        'HOST': 'ec2-3-208-157-78.compute-1.amazonaws.com',
+        'PORT':'5432',
+    }
 }
 
 
