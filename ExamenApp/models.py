@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class Sitios(models.Model):
-    descripcion = models.CharField(max_length=80,null = False,blank=False)
+    descripcion = models.CharField(max_length=200,null = False,blank=False)
     longitud = models.FloatField(null=False, blank=False)
     latitud = models.FloatField(null=False, blank=False)
     fotografia =  models.BinaryField(blank = False, null = False, editable = True)

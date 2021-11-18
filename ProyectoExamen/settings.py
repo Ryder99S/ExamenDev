@@ -92,6 +92,15 @@ DATABASES = {
         'HOST': 'ec2-3-208-157-78.compute-1.amazonaws.com',
         'PORT':'5432',
     }
+
+    #     'default': {
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'pruebaExamen',
+    #     'USER': 'postgres',
+    #     'PASSWORD':'riderposadas99',
+    #     'HOST': 'localhost',
+    #     'PORT':'5432',
+    # }
 }
 
 
