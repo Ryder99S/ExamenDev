@@ -45,13 +45,13 @@ class ApiSitios(APIView):
                 s = Sitios.objects.get(pk=id_tp)
                 lista.append({'pk':s.pk, 'descripcion':s.descripcion, 'longitud':s.longitud, 'latitud':s.latitud, 'fotografia':bytes(s.fotografia)})
             else:
-                for s in Sitios.objects.all():
+                for s in Sitios.objects.all().order_by('pk'):
                     lista.append({'pk':s.pk, 'descripcion':s.descripcion, 'longitud':s.longitud, 'latitud':s.latitud, 'fotografia':bytes(s.fotografia)})
                 ctx = {'Id':'No Encontrado','sitio':lista}
                 return Response(ctx)
         else:
             #sitio = list(Sitios.objects.all().values('pk','descripcion','longitud','latitud','fotografia'))
-            for p in Sitios.objects.all():
+            for p in Sitios.objects.all().order_by('pk'):
                 lista.append({'pk':p.pk, 'descripcion':p.descripcion, 'longitud':p.longitud, 'latitud':p.latitud, 'fotografia':bytes(p.fotografia)})
         if lista:
             ctx = {'sitio':lista}
@@ -104,31 +104,36 @@ class ApiSitios(APIView):
             else:
                 ctx = {'error': errores}
         return Response(ctx)
-#     def put(self, request):
-#         if  request.method == 'PUT':
-#             Data = json.loads(request.body)
-#             id_tp = Data['ID'] #Id del tipo de producto a filtrar
-#             if Tipo_producto.objects.filter(pk=id_tp).exists():
+    def put(self, request):
+        if  request.method == 'PUT':
+            Data = json.loads(request.body)
+            id_tp = Data['ID'] #Id del tipo de producto a filtrar
+            if Sitios.objects.filter(pk=id_tp).exists():
 
-#                 D_producto = Data['descripcion_producto']
+                descripcion = Data["descripcion"]
+                longitud = Data["longitud"]
+                latitud = Data["latitud"]
+                fotografia = bytes(Data["fotografia"],'utf-8')
 
-#                 T_producto = Tipo_producto.objects.filter(pk=id_tp).update(
-#                                                                                     descripcion_producto = D_producto,
-
-#                                                                                     )
-#                 ctx = {'Sussces','Datos modificados'}
-#                 return Response(ctx)
-#             else:
-#                 ctx = {'Error','ID no existente'}
-#                 return Response(ctx)
-#     def delete(self, request):
-#         if request.method == 'DELETE':
-#             Data = json.loads(request.body)
-#             id_tp = Data['ID']
-#             if Tipo_producto.objects.filter(pk=id_tp).exists():
-#                 eliminar = Tipo_producto.objects.filter(pk=id_tp).delete()
-#                 ctx = {'Sussces','Registro Eliminado'}
-#                 return Response(ctx)
-#             else:
-#                 ctx = {'Error','ID no existente'}
-#                 return Response(ctx)
+                editar = Sitios.objects.filter(pk=id_tp).update(
+                                                                descripcion = descripcion,
+                                                                longitud = longitud,
+                                                                latitud = latitud,
+                                                                fotografia = fotografia
+                                                                                    )
+                ctx = {'Sussces','Datos modificados'}
+                return Response(ctx)
+            else:
+                ctx = {'Error','ID no existente'}
+                return Response(ctx)
+    def delete(self, request):
+        if request.method == 'DELETE':
+            Data = json.loads(request.body)
+            id_tp = Data['ID']
+            if Sitios.objects.filter(pk=id_tp).exists():
+                eliminar = Sitios.objects.filter(pk=id_tp).delete()
+                ctx = {'Sussces','Registro Eliminado'}
+                return Response(ctx)
+            else:
+                ctx = {'Error','ID no existente'}
+                return Response(ctx)
