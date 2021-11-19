@@ -66,8 +66,8 @@ class ApiSitios(APIView):
             # print(request.body)
             Data = json.loads(request.body)
             descripcion = Data["descripcion"]
-            longitud = Data["longitud"]
-            latitud = Data["latitud"]
+            longitud = float(Data["longitud"])
+            latitud = float(Data["latitud"])
             fotografia = Data["fotografia"]
 
             #fotografia2 = base64.b64encode(fotografia.encode('utf-8'))
@@ -98,11 +98,11 @@ class ApiSitios(APIView):
             print(errores)
 
             if not errores:
-                ctx = {'Sussces','Se almaceno con exito'}
+                ctx = {'Mensaje':'Se almaceno con exito'}
                 guardado = Sitios(**query_sitios)
                 guardado.save()
             else:
-                ctx = {'error': errores}
+                ctx = {'Mensaje': errores}
         return Response(ctx)
     def put(self, request):
         if  request.method == 'PUT':
@@ -121,7 +121,7 @@ class ApiSitios(APIView):
                                                                 latitud = latitud,
                                                                 fotografia = fotografia
                                                                                     )
-                ctx = {'Sussces','Datos modificados'}
+                ctx = {'Mensaje','Datos modificados'}
                 return Response(ctx)
             else:
                 ctx = {'Error','ID no existente'}
